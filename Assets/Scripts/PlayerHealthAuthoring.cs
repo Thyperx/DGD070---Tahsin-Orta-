@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class PlayerHealthAuthoring : MonoBehaviour
 {
-    public float Value = 100f; // Saðlýk deðeri (default: 100)
+    public float Value = 100f;
 
     class Baker : Baker<PlayerHealthAuthoring>
     {
         public override void Bake(PlayerHealthAuthoring authoring)
         {
-            AddComponent(new PlayerHealthComponent { Value = authoring.Value });
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponent(entity, new PlayerHealthComponent { Value = authoring.Value });
         }
     }
 }
